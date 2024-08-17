@@ -10,26 +10,29 @@ function SignInPage() {
 
   return (
     <div style={{
-      fontFamily: 'Arial, sans-serif',
+      fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif', // Changed to Cambria
       textAlign: 'center',
-      padding: '20px',
+      padding: '50px',
       backgroundColor: '#17153B',
       color: '#C8ACD6',
-      height: '100vh',
+      minHeight: '100vh',
+      minWidth: '100vw',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      boxSizing: 'border-box'
     }}>
-      <img src="src/logo.png" alt="Logo" style={{ marginBottom: '20px', width: '120px' }} />
-      <h1>Welcome to Your Events Guide</h1>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOrSEJuaCW5PbxnNvAxKacy8gv0vbvnYMqX6BzF-UiX87dLLY6ygJ-99925zlc5-lIxgUvvvyKM7nMHcPqg-p8dN-mnybBy_EvpL5x8lovp7Lt5AG0CP2V8FymRxBIQ-OVKBxJnDo2Jn_skojDDaRE=w400-h400-s-no-gm"
+       alt="Eventopia Logo" style={{ marginBottom: '10px', width: '300px' }} />
+      <h1 style={{ fontSize: '2.5em', marginBottom: '20px' }}>Welcome to Eventopia</h1>
       <button onClick={handleSignIn} style={{
-        padding: '10px 20px',
-        fontSize: '16px',
+        padding: '15px 30px',
+        fontSize: '20px',
         backgroundColor: '#2E236C',
         color: '#C8ACD6',
         border: 'none',
-        borderRadius: '5px',
+        borderRadius: '10px',
         cursor: 'pointer',
         marginTop: '20px'
       }}>
