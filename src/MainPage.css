@@ -1,0 +1,81 @@
+ /* MainPage.css */
+ .chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    background-color: #433D8B; /* Dark blue background */
+    color: #C8ACD6; /* Light purple text */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-window {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: #2E236C; /* Dark blue background for the chat window */
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+ 
+    flex-direction: column;
+}
+
+.chat-header {
+    color: #C8ACD6;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.message-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 5px;
+}
+
+.message-bubble {
+    background-color: #C8ACD6;
+    color: #2E236C;
+    padding: 8px 12px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    align-self: flex-start; /* Aligns messages to the left */
+}
+
+.input-area {
+    display: flex;
+    margin-top: auto; /* Keeps the input area at the bottom */
+}
+
+.message-input {
+    flex-grow: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #C8ACD6;
+    margin-right: 5px;
+}
+
+.send-button {
+    padding: 8px 12px;
+    background-color: #433D8B;
+    color: #C8ACD6;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.event-grid {
+    display: flex;
+    justify-content: space-around; /* Ensures items are spaced out evenly */
+    flex-wrap: wrap; /* Allows items to wrap onto the next line */
+    padding-top: 60px; /* Adjusted to ensure there's space below the header */
+}

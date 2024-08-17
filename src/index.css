@@ -1,12 +1,13 @@
+
 body {
   margin: 0;
-  background: linear-gradient(180deg, rgb(117, 81, 194), rgb(255, 255, 255));
+  background: linear-gradient(180deg, rgb(46, 35, 108), rgb(200, 172, 214));
   display: flex;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   height: 100vh;
   width: 100vw;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
 }
 
 main {
@@ -28,7 +29,7 @@ button {
   color: white;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: 433D8B;
 }
 button:focus,
 button:focus-visible {
@@ -63,3 +64,9 @@ a {
   font-weight: 800;
   text-decoration: none;
 }
+
+/*#17153B
+#2E236C
+#433D8B
+#C8ACD6
+*/
