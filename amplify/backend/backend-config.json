@@ -1,4 +1,22 @@
 {
+  "api": {
+    "myproj": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
   "auth": {
     "myproj55c156b4": {
       "customAuth": false,
@@ -26,6 +44,32 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_storage_myproja0cc99fb_bucketName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "myproja0cc99fb"
+        }
+      ]
+    },
+    "AMPLIFY_storage_myproja0cc99fb_region": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "myproja0cc99fb"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "myproja0cc99fb": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "serviceType": "imported"
     }
   }
 }

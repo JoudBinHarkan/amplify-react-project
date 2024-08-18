@@ -14,6 +14,15 @@
     "categories": {
       "auth": {
         "myproj55c156b4": {}
+      },
+      "storage": {
+        "myproja0cc99fb": {
+          "bucketName": "event-summary-assetbucket-s5ohucfhzjtt",
+          "region": "us-east-1"
+        }
+      },
+      "api": {
+        "myproj": {}
       }
     }
   }

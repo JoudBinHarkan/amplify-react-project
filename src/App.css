@@ -40,3 +40,21 @@
 .read-the-docs {
   color: #888;
 }
+
+.events-page {
+  padding: 20px;
+}
+
+.event-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.event-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+}

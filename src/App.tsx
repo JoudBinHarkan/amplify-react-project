@@ -1,15 +1,43 @@
-import _React_, { useState } from "react";
-import _Amplify_ from 'aws-amplify'; 
+import React, { useEffect, useState } from "react";
+import { Amplify } from 'aws-amplify';
 import * as _API_ from 'aws-amplify';
-import post from 'aws-amplify/api';
+import _graphqlOperation_ from 'aws-amplify';
+import {post} from 'aws-amplify/api';
+import _Storage_ from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
+import {fromCognitoIdentityPool} from "@aws-sdk/credential-providers";
+import "./App.css";
+import AWS from 'aws-sdk';
+import awsconfig from './amplifyconfiguration.json';
+import styles from './index.css';
+import EventCard from './components/EventCard'; 
+
+AWS.config.update({
+  region: awsconfig.aws_project_region,
+  credentials: new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: awsconfig.aws_cognito_identity_pool_id,
+  }),
+}) 
+import { Container, Grid, Card, CardContent, Typography, Button, AppBar, Toolbar } from '@mui/material';
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+const client = new DynamoDBClient({});
+const docClient = new AWS.DynamoDB.DocumentClient();
+import { GetCommand } from "@aws-sdk/lib-dynamodb";
+const categories = [
+  { name: 'Workshops', filter: 'workshop' },
+  { name: 'Conferences', filter: 'conference' },
+  { name: 'Meetups', filter: 'meetup' },
+  // Add more categories as needed
+];
 
 function App() {
+  const [events, setEvents] = useState<any[]>([]);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<string[]>([]);
   const [currentMessage, setCurrentMessage] = useState("");
-
+  
   function handleSignIn() {
     setIsSignedIn(true);
   }
@@ -22,11 +50,11 @@ function App() {
     setIsChatOpen(!isChatOpen);
   }
 
-  async function handleSendMessage() {
-    if (currentMessage.trim() !== "") {
-        setChatMessages(prevMessages => [...prevMessages, `You: ${currentMessage}`]);
-        setCurrentMessage("");
-        try {
+async function handleSendMessage() {
+  if (currentMessage.trim() !== "") {
+      setChatMessages(prevMessages => [...prevMessages, `You: ${currentMessage}`]);
+       setCurrentMessage("");
+       try {
             const apiResponse = await fetch(`https://5hio7pe5vb.execute-api.us-east-1.amazonaws.com/invoke_chat`, {
                 method: "POST",
                 headers: {
@@ -51,9 +79,43 @@ function App() {
         }
     }
 }
+async function fetchAllEvents() {
+  try {
+    const params = {
+      TableName: 'EventsData',
+    };
 
+    const result = await docClient.scan(params).promise();
 
+    if (result.Items) {
+      return result.Items;
+    } else {
+      console.error('No items found');
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    return [];
+  }
+}
 
+useEffect(() => {
+  async function loadEvents() {
+    try {
+      const fetchedEvents = await fetchAllEvents();
+
+      // Check if fetchedEvents is an array of Event objects
+      if (Array.isArray(fetchedEvents)) {
+        setEvents(fetchedEvents);
+      } else {
+        console.error('Fetched events are not in the correct format');
+      }
+    } catch (error) {
+      console.error('Error loading events:', error);
+    }
+  }
+  loadEvents();
+}, []); 
 
 
   // Common styles
@@ -80,7 +142,7 @@ function App() {
       </div>
     );
   }
-
+  
   return (
     <main style={{ ...commonStyles, padding: '20px', textAlign: 'center' }}>
       {/* Sign Out Button */}
@@ -99,6 +161,15 @@ function App() {
       }}>
         Sign Out
       </button>
+      <div className="events-page">
+      <h1>Events</h1>
+      <div className="event-cards-container">
+        {events.map((event) => (
+          <EventCard key={event.EventID} event={event} />
+        ))}
+      </div>
+    </div>
+      
 
       {/* User Avatar */}
       <div style={{
@@ -115,14 +186,11 @@ function App() {
         color: '#ffa500',
         fontSize: '18px',
         ...commonStyles
-      }}>
-        J
-      </div>
+      }}> 
+      J
+    </div>
+  
 
-      <h1 style={{ fontSize: '3em', marginBottom: '40px' }}>Upcoming Events</h1>
-      <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '40px' }}>
-        {/* Event Cards (existing code) */}
-      </div>
 
       {/* Chatbot Button */}
       <button onClick={handleChatToggle} style={{
@@ -195,21 +263,23 @@ function App() {
             ))}
           </div>
           <div>
-          <div className="chat-input-container">
-        <input
-          id="chat-input"
-          type="text"
-          value={currentMessage}
-          onChange={(e) => setCurrentMessage(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' ? handleSendMessage() : null}
-          placeholder="Type a message..."
-          className="chat-input"
-        />
-       </div>
-      </div>
-      </div> )}
+            <div className="chat-input-container">
+              <input
+                id="chat-input"
+                type="text"
+                value={currentMessage}
+                onChange={(e) => setCurrentMessage(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' ? handleSendMessage() : null}
+                placeholder="Type a message..."
+                className="chat-input"
+              />
+            </div>
+          </div>
+
+        </div>
+      )}
     </main>
-          );
+  );
 }
 
-export default App; 
+export default App;
