@@ -65,6 +65,11 @@
     }
   },
   "storage": {
+    "myBucket": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    },
     "myproja0cc99fb": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",

@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background: linear-gradient(180deg, rgb(117, 81, 194), rgb(255, 255, 255));
+  background: #646cff;
   display: flex;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   height: 100vh;
@@ -25,7 +25,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-  color: white;
+  color: #646cff;
 }
 button:hover {
   border-color: #646cff;
@@ -51,12 +51,12 @@ ul {
 }
 
 li {
-  background-color: white;
+  background-color: #646cff;
   padding: 8px;
 }
 
 li:hover {
-  background: #dadbf9;
+  background: #646cff;
 }
 
 a {
@@ -64,7 +64,7 @@ a {
   text-decoration: none;
 }
 .card {
-  border: 1px solid #ddd;
+  border: 1px solid #646cff;
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;

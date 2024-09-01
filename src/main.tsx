@@ -1,7 +1,7 @@
 import React from "react";
 import { Amplify } from 'aws-amplify';
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import App from './App'; 
 import "./index.css";
 
 // @ts-expect-error miss type declaration

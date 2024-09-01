@@ -19,7 +19,8 @@
         "myproja0cc99fb": {
           "bucketName": "event-summary-assetbucket-s5ohucfhzjtt",
           "region": "us-east-1"
-        }
+        },
+        "myBucket": {}
       },
       "api": {
         "myproj": {}

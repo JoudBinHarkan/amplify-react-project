@@ -1,30 +1,20 @@
 import React from 'react';
-import registerUserForEvent from './RegisterUser'; // Ensure correct path
 
-interface EventCardProps {
-  event: {
-    EventID: string;
-    EventTitle: string;
-    // Add other fields as needed
-  };
+interface Event {
+  EventID: string;
+  EventTitle: string;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ event }) => {
-  const handleRegister = async () => {
-    try {
-      await registerUserForEvent(event.EventID);
-      console.log(`Successfully registered for event ${event.EventID}`);
-    } catch (error) {
-      console.error(`Error registering for event ${event.EventID}:`, error);
-    }
-  };
+interface EventCardProps {
+  event: Event;
+  onRegister: (eventId: string) => void;
+}
 
+const EventCard: React.FC<EventCardProps> = ({ event, onRegister }) => {
   return (
-    <div className="event-card">
-      <h2>{event.EventTitle}</h2>
-      <button onClick={handleRegister}>
-        Register
-      </button>
+    <div>
+      <h3>{event.EventTitle}</h3>
+      <button onClick={() => onRegister(event.EventID)}>Register</button>
     </div>
   );
 };
